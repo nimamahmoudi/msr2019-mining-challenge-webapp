@@ -3,7 +3,7 @@ from django.urls import include
 
 from . import views
 
-app_name = 'cps'
+app_name = 'python_snippets'
 
 urlpatterns = [
 
