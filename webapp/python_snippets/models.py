@@ -16,6 +16,10 @@ class PythonSnippet(models.Model):
     last_process_sent_p3 = models.DateTimeField(default=None, blank=True, null=True)
     python2_result = models.TextField(blank=True, null=True)
     python3_result = models.TextField(blank=True, null=True)
+    execution_time_p2 = models.FloatField(blank=True, null=True)
+    execution_time_p3 = models.FloatField(blank=True, null=True)
+    status_code_p2 = models.IntegerField(blank=True, null=True)
+    status_code_p3 = models.IntegerField(blank=True, null=True)
 
     def __unicode__(self):
         return f'{self.original_id}'
