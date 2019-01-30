@@ -9,6 +9,9 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+# Delete all if necessary
+# User.objects.all().delete()
+
 try:
     User.objects.create_superuser('admin', 'nima_mahmoudi@live.com', 'pass')
 except Exception:
@@ -20,7 +23,7 @@ import pandas as pd
 # Delete all if necessary
 # models.PythonSnippet.objects.all().delete()
 
-data_file_name = 'data/mytable.csv'
+data_file_name = '../data/mytable.csv'
 df = pd.read_csv(data_file_name, error_bad_lines=False, warn_bad_lines=False)
 df = df.head(100)
 df = df.where((pd.notnull(df)), None)
