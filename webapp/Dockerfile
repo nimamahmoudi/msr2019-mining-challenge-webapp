@@ -21,5 +21,6 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 COPY ./ .
 
-CMD [ "python", "-u", "manage.py", "runserver", "0.0.0.0:8000" ]
+# CMD [ "python", "-u", "manage.py", "runserver", "0.0.0.0:8000" ]
+CMD [ "gunicorn", "--bind", "0.0.0.0:8000", "webapp.wsgi" ]
 
