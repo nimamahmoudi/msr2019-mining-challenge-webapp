@@ -20,9 +20,41 @@ class PythonSnippet(models.Model):
     execution_time_p3 = models.FloatField(blank=True, null=True)
     status_code_p2 = models.IntegerField(blank=True, null=True)
     status_code_p3 = models.IntegerField(blank=True, null=True)
+    last_update = models.DateTimeField(auto_now=True)
+
+    def update_last_process_p2(self):
+        self.refresh_from_db()
+        self.last_process_sent_p2 = timezone.now()
+        self.save()
+
+    def update_last_process_p3(self):
+        self.refresh_from_db()
+        self.last_process_sent_p3 = timezone.now()
+        self.save()
 
     def __unicode__(self):
-        return f'{self.original_id}'
+        return f'{self.id} - {self.original_id}'
 
     def __str__(self):
         return self.__unicode__()
+
+    def to_dict(self):
+        return {
+            'pk': self.id,
+            'original_id': self.original_id,
+            'post_id': self.post_id,
+            'pred_post_block_version_id': self.pred_post_block_version_id,
+            'root_post_block_version_id': self.root_post_block_version_id,
+            'length': self.length,
+            'line_count': self.line_count,
+            'tags': self.tags,
+            'content': self.content,
+            'last_process_sent_p2': self.last_process_sent_p2,
+            'last_process_sent_p3': self.last_process_sent_p3,
+            'python2_result': self.python2_result,
+            'python3_result': self.python3_result,
+            'execution_time_p2': self.execution_time_p2,
+            'execution_time_p3': self.execution_time_p3,
+            'status_code_p2': self.status_code_p2,
+            'status_code_p3': self.status_code_p3,
+        }
