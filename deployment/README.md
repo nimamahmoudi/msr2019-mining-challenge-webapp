@@ -35,6 +35,12 @@ kubectl apply -f kubernetes/django/service.yaml
 
 ```
 
+## Deploy the Parser
+```
+kubectl apply -f kubernetes/parser/deployment.yaml
+kubectl delete deployment parser-deployment
+```
+
 
 # Test
 
