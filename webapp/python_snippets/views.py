@@ -15,6 +15,27 @@ def get_task(request, pk):
 
 
 @csrf_exempt
+def clear_everything(request):
+    all_snippets = PythonSnippet.objects.all()
+
+    for snippet in all_snippets:
+        snippet.last_process_sent_p2 = None
+        snippet.last_process_sent_p3 = None
+        snippet.python2_result = None
+        snippet.execution_time_p2 = None
+        snippet.status_code_p2 = None
+        snippet.python3_result = None
+        snippet.execution_time_p3 = None
+        snippet.status_code_p3 = None
+        snippet.save()
+
+    return JsonResponse({
+        'msg': 'OK!',
+        'code': 200,
+    })
+
+
+@csrf_exempt
 def get_new_task(request, python_version=2):
     # Check for valid python version
     python_version = int(python_version)
