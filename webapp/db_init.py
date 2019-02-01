@@ -21,16 +21,19 @@ from python_snippets import models
 import pandas as pd
 
 # Delete all if necessary
-# models.PythonSnippet.objects.all().delete()
+models.PythonSnippet.objects.all().delete()
+
+print('Loading the data from file...')
 
 data_file_name = '../data/mytable.csv'
 df = pd.read_csv(data_file_name, error_bad_lines=False, warn_bad_lines=False)
-df = df.head(100)
 df = df.where((pd.notnull(df)), None)
 
+print('Loading models onto the db...')
 
-max_num_rows = min(100, df.shape[0])
+max_num_rows = min(10000, df.shape[0])
 
+all_ps = []
 for i in range(max_num_rows):
     row = df.iloc[i, :]
     ps = models.PythonSnippet()
@@ -42,8 +45,12 @@ for i in range(max_num_rows):
     ps.line_count = row['LineCount']
     ps.tags = row['Tags']
     ps.content = row['Content']
+    all_ps.append(ps)
+    # try:
+    #     ps.save()
+    # except Exception:
+    #     pass
 
-    try:
-        ps.save()
-    except Exception:
-        pass
+print('Bulk Saving...')
+
+models.PythonSnippet.objects.bulk_create(all_ps, batch_size=999)
