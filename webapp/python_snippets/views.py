@@ -59,7 +59,8 @@ def get_new_task(request, python_version=2):
         return HttpResponseBadRequest('No more snippets left')
 
     # Choose an snippet randomly
-    snippet = snippets[random.randint(0, len(snippets) - 1)]
+    # snippet = snippets[random.randint(0, len(snippets) - 1)]
+    snippet = snippets[random.randint(0, 100)]
 
     # update the last process
     if python_version == 2:
@@ -68,7 +69,10 @@ def get_new_task(request, python_version=2):
         snippet.update_last_process_p3()
 
     # Save the changes
-    snippet.save()
+    if python_version == 2:
+        snippet.save(update_fields=["last_process_sent_p2"])
+    else:
+        snippet.save(update_fields=["last_process_sent_p3"])
 
     obj = snippet.to_dict()
     obj['python_version'] = python_version
@@ -90,12 +94,14 @@ def update_task(request, python_version=2):
         snippet.python2_result = str(request.POST.get('result', ''))
         snippet.execution_time_p2 = str(request.POST.get('execution_time', ''))
         snippet.status_code_p2 = int(request.POST.get('status_code', ''))
+        fields = ["python2_result", "execution_time_p2", "status_code_p2"]
     else:
         snippet.python3_result = str(request.POST.get('result', ''))
         snippet.execution_time_p3 = str(request.POST.get('execution_time', ''))
         snippet.status_code_p3 = int(request.POST.get('status_code', ''))
+        fields = ["python3_result", "execution_time_p3", "status_code_p3"]
 
-    snippet.save()
+    snippet.save(update_fields=fields)
 
     return JsonResponse({
         'msg': 'OK!',

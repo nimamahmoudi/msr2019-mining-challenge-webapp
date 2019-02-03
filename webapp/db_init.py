@@ -33,8 +33,8 @@ df = df.where((pd.notnull(df)), None)
 
 print('Loading models onto the db...')
 
-# max_num_rows = min(10000, df.shape[0])
-max_num_rows = df.shape[0]
+max_num_rows = min(1000, df.shape[0])
+# max_num_rows = df.shape[0]
 
 print('num of rows:', max_num_rows)
 

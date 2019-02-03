@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: parser-deployment
 spec:
-  replicas: 20
+  replicas: 10
   template:
     metadata:
       labels:
