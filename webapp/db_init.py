@@ -25,13 +25,18 @@ models.PythonSnippet.objects.all().delete()
 
 print('Loading the data from file...')
 
-data_file_name = '../data/mytable.csv'
+# data_file_name = '../data/mytable.csv'
+data_file_name = '../data/SnippetsAnswerPythonOnly.csv'
+
 df = pd.read_csv(data_file_name, error_bad_lines=False, warn_bad_lines=False)
 df = df.where((pd.notnull(df)), None)
 
 print('Loading models onto the db...')
 
-max_num_rows = min(10000, df.shape[0])
+# max_num_rows = min(10000, df.shape[0])
+max_num_rows = df.shape[0]
+
+print('num of rows:', max_num_rows)
 
 all_ps = []
 for i in range(max_num_rows):
@@ -47,7 +52,7 @@ for i in range(max_num_rows):
     ps.content = row['Content']
     all_ps.append(ps)
     # try:
-    #     ps.save()
+    # ps.save()
     # except Exception:
     #     pass
 

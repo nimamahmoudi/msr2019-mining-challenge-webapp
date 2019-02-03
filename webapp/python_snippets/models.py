@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from postgres_copy import CopyManager
 
 
 # Create your models here.
@@ -21,6 +22,8 @@ class PythonSnippet(models.Model):
     status_code_p2 = models.IntegerField(blank=True, null=True)
     status_code_p3 = models.IntegerField(blank=True, null=True)
     last_update = models.DateTimeField(auto_now=True)
+
+    objects = CopyManager()
 
     def update_last_process_p2(self):
         self.refresh_from_db()
