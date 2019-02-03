@@ -33,24 +33,38 @@ df = df.where((pd.notnull(df)), None)
 
 print('Loading models onto the db...')
 
-max_num_rows = min(1000, df.shape[0])
-# max_num_rows = df.shape[0]
+# max_num_rows = min(1000, df.shape[0])
+max_num_rows = df.shape[0]
 
 print('num of rows:', max_num_rows)
 
 all_ps = []
 for i in range(max_num_rows):
     row = df.iloc[i, :]
-    ps = models.PythonSnippet()
-    ps.original_id = row['Id']
-    ps.post_id = row['PostId']
-    ps.pred_post_block_version_id = row['PredPostBlockVersionId']
-    ps.root_post_block_version_id = row['RootPostBlockVersionId']
-    ps.length = row['Length']
-    ps.line_count = row['LineCount']
-    ps.tags = row['Tags']
-    ps.content = row['Content']
-    all_ps.append(ps)
+
+    if row['Id'] == 210207849:
+        ps = models.PythonSnippet()
+        ps.original_id = row['Id']
+        ps.post_id = row['PostId']
+        ps.pred_post_block_version_id = row['PredPostBlockVersionId']
+        ps.root_post_block_version_id = row['RootPostBlockVersionId']
+        ps.length = row['Length']
+        ps.line_count = row['LineCount']
+        ps.tags = row['Tags']
+        ps.content = row['Content']
+        ps.save()
+
+    # ps = models.PythonSnippet()
+    # ps.original_id = row['Id']
+    # ps.post_id = row['PostId']
+    # ps.pred_post_block_version_id = row['PredPostBlockVersionId']
+    # ps.root_post_block_version_id = row['RootPostBlockVersionId']
+    # ps.length = row['Length']
+    # ps.line_count = row['LineCount']
+    # ps.tags = row['Tags']
+    # ps.content = row['Content']
+    # all_ps.append(ps)
+    
     # try:
     # ps.save()
     # except Exception:

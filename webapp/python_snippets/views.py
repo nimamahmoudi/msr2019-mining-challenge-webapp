@@ -55,11 +55,12 @@ def get_new_task(request, python_version=2):
             Q(last_process_sent_p3__lte=last_process_threshold, status_code_p3__isnull=True)
         )
 
-    if len(snippets) == 0:
-        return HttpResponseBadRequest('No more snippets left')
+    # if len(snippets) == 0:
+    #     return HttpResponseBadRequest('No more snippets left')
 
     # Choose an snippet randomly
     # snippet = snippets[random.randint(0, len(snippets) - 1)]
+    # snippet = snippets[random.randint(0, min(100, len(snippets) - 1))]
     snippet = snippets[random.randint(0, 100)]
 
     # update the last process
@@ -71,8 +72,10 @@ def get_new_task(request, python_version=2):
     # Save the changes
     if python_version == 2:
         snippet.save(update_fields=["last_process_sent_p2"])
+        # snippet.update(last_process_sent_p2= timezone.now())
     else:
         snippet.save(update_fields=["last_process_sent_p3"])
+        # snippet.update(last_process_sent_p3= timezone.now())
 
     obj = snippet.to_dict()
     obj['python_version'] = python_version

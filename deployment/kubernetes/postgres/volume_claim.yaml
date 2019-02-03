@@ -10,5 +10,5 @@ spec:
   storageClassName: standard
   resources:
     requests:
-      storage: 2Gi
+      storage: 10Gi
   volumeName: postgres-pv
