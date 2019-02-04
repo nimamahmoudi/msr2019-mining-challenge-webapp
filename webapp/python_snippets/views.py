@@ -60,8 +60,8 @@ def get_new_task(request, python_version=2):
 
     # Choose an snippet randomly
     # snippet = snippets[random.randint(0, len(snippets) - 1)]
-    # snippet = snippets[random.randint(0, min(100, len(snippets) - 1))]
-    snippet = snippets[random.randint(0, 100)]
+    # snippet = snippets[random.randint(0, 100)]
+    snippet = snippets[0]
 
     # update the last process
     if python_version == 2:

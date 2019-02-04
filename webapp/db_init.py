@@ -42,28 +42,28 @@ all_ps = []
 for i in range(max_num_rows):
     row = df.iloc[i, :]
 
-    if row['Id'] == 210207849:
-        ps = models.PythonSnippet()
-        ps.original_id = row['Id']
-        ps.post_id = row['PostId']
-        ps.pred_post_block_version_id = row['PredPostBlockVersionId']
-        ps.root_post_block_version_id = row['RootPostBlockVersionId']
-        ps.length = row['Length']
-        ps.line_count = row['LineCount']
-        ps.tags = row['Tags']
-        ps.content = row['Content']
-        ps.save()
+    # if row['Id'] == 210207849:
+    #     ps = models.PythonSnippet()
+    #     ps.original_id = row['Id']
+    #     ps.post_id = row['PostId']
+    #     ps.pred_post_block_version_id = row['PredPostBlockVersionId']
+    #     ps.root_post_block_version_id = row['RootPostBlockVersionId']
+    #     ps.length = row['Length']
+    #     ps.line_count = row['LineCount']
+    #     ps.tags = row['Tags']
+    #     ps.content = row['Content']
+    #     ps.save()
 
-    # ps = models.PythonSnippet()
-    # ps.original_id = row['Id']
-    # ps.post_id = row['PostId']
-    # ps.pred_post_block_version_id = row['PredPostBlockVersionId']
-    # ps.root_post_block_version_id = row['RootPostBlockVersionId']
-    # ps.length = row['Length']
-    # ps.line_count = row['LineCount']
-    # ps.tags = row['Tags']
-    # ps.content = row['Content']
-    # all_ps.append(ps)
+    ps = models.PythonSnippet()
+    ps.original_id = row['Id']
+    ps.post_id = row['PostId']
+    ps.pred_post_block_version_id = row['PredPostBlockVersionId']
+    ps.root_post_block_version_id = row['RootPostBlockVersionId']
+    ps.length = row['Length']
+    ps.line_count = row['LineCount']
+    ps.tags = row['Tags']
+    ps.content = row['Content']
+    all_ps.append(ps)
     
     # try:
     # ps.save()
