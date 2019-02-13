@@ -17,6 +17,9 @@ spec:
       containers:
         - name: django
           image: nimamahmoudi/mlse-webapp
+          resources:
+            requests:
+              cpu: "0.5"
           ports:
             - containerPort: 8000
           env:
