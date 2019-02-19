@@ -1,6 +1,6 @@
 language: python
 env:
-  - DB=sqlite
+  # - DB=sqlite
   - DB=postgres
 python:
   - "3.5"
