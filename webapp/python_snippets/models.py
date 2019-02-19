@@ -36,7 +36,7 @@ class PythonSnippet(models.Model):
         self.save()
 
     def __unicode__(self):
-        return f'{self.id} - {self.original_id}'
+        return '{} - {}'.format(self.id, self.original_id)
 
     def __str__(self):
         return self.__unicode__()
