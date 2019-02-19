@@ -84,16 +84,28 @@ if os.getenv('DB', 'POSTGRES') == 'sqlite':
         }
     }
 else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'kubernetes_django',
-            'USER': os.getenv('POSTGRES_USER', 'django'),
-            'PASSWORD': os.getenv('POSTGRES_PASSWORD', '1a26d1g26d1gesb?e7desb?e7d'),
-            'HOST': os.getenv('POSTGRES_HOST', '127.0.0.1'),
-            'PORT': os.getenv('POSTGRES_PORT', 5432)
+    if 'TRAVIS' in os.environ:
+        DATABASES = {
+            'default': {
+                'ENGINE':   'django.db.backends.postgresql_psycopg2',
+                'NAME':     'travisci',
+                'USER':     'postgres',
+                'PASSWORD': '',
+                'HOST':     'localhost',
+                'PORT':     '',
+            }
         }
-    }
+    else:
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': 'kubernetes_django',
+                'USER': os.getenv('POSTGRES_USER', 'django'),
+                'PASSWORD': os.getenv('POSTGRES_PASSWORD', '1a26d1g26d1gesb?e7desb?e7d'),
+                'HOST': os.getenv('POSTGRES_HOST', '127.0.0.1'),
+                'PORT': os.getenv('POSTGRES_PORT', 5432)
+            }
+        }
 
 print(DATABASES)
 
