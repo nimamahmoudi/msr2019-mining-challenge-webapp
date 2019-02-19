@@ -3,7 +3,6 @@ env:
   - DB=sqlite
   - DB=postgres
 python:
-  - "2.7"
   - "3.5"
   - "3.5-dev"  # 3.5 development branch
   - "3.6"
