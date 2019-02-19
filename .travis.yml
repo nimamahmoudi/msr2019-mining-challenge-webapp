@@ -15,7 +15,7 @@ install:
 before_script:
   - sh -c "if [ '$DB' = 'postgres' ]; then psql -c 'DROP DATABASE IF EXISTS kubernetes_django;' -U postgres; fi"
   - sh -c "if [ '$DB' = 'postgres' ]; then psql -c 'CREATE DATABASE kubernetes_django;' -U postgres; fi"
-  - sh -c "if [ '$DB' = 'postgres' ]; then psql -c 'CREATE USER django WITH PASSWORD \'1a26d1g26d1gesb\';' -U postgres; fi"
+  - sh -c "if [ '$DB' = 'postgres' ]; then psql -c "CREATE USER django WITH PASSWORD '1a26d1g26d1gesb';" -U postgres; fi"
   - sh -c "if [ '$DB' = 'postgres' ]; then psql -c 'grant all privileges on database kubernetes_django to django;' -U postgres; fi"
 # command to run tests
 script:
